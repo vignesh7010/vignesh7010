@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    #chat-container {
+      width: 400px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fff;
+    }
+
+    #messages {
+      max-height: 300px;
+      overflow-y: scroll;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    #input-container {
+      display: flex;
+    }
+
+    #message-input {
+      flex: 1;
+      padding: 5px;
+    }
+
+    #send-button {
+      padding: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="messages"></div>
+    <div id="input-container">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const messagesContainer = document.getElementById('messages');
+      const messageInput = document.getElementById('message-input');
+      const sendButton = document.getElementById('send-button');
+
+      sendButton.addEventListener('click', sendMessage);
+
+      function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message !== '') {
+          displayMessage(`You: ${message}`);
+          messageInput.value = '';
+        }
+      }
+
+      function displayMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
